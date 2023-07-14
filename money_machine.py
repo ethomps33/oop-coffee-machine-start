@@ -1,3 +1,7 @@
+import random
+
+
+
 class MoneyMachine:
 
     CURRENCY = "$"
@@ -6,16 +10,26 @@ class MoneyMachine:
         "quarters": 0.25,
         "dimes": 0.10,
         "nickles": 0.05,
-        "pennies": 0.01
+        "pennie": 0.01
     }
 
     def __init__(self):
         self.profit = 0
         self.money_received = 0
 
+    wallet = {
+        'quarters': 0,
+        'dimes': 0,
+        'nickles': 0,
+        'pennie': 0,
+    }
+
     def report(self):
         """Prints the current profit"""
-        print(f"Money: {self.CURRENCY}{self.profit}")
+        for coin in self.wallet:
+            self.wallet[coin] = random.randint(0, 20)
+            self.profit += int(self.wallet[coin]) * self.COIN_VALUES[coin]
+        print(f"Money: {self.CURRENCY}{round(self.profit,2)}")
 
     def process_coins(self):
         """Returns the total calculated from coins inserted."""
@@ -30,7 +44,7 @@ class MoneyMachine:
         if self.money_received >= cost:
             change = round(self.money_received - cost, 2)
             print(f"Here is {self.CURRENCY}{change} in change.")
-            self.profit += cost
+            self.profit -= cost
             self.money_received = 0
             return True
         else:

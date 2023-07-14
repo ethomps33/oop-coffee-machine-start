@@ -12,7 +12,7 @@ cappuccino = MenuItem(name="cappuccino", water=250, milk=50, coffee=24, cost=3)
 
 machine.report()
 
-menu.get_items()
+money.report()
 
 order = input(f"Hi! What can I get for you today? {menu.get_items()}: ").lower()
 
@@ -28,7 +28,8 @@ machine.is_resource_sufficient(order)
 
 money.make_payment(order.cost)
 
-machine.make_coffee(order)
+if money.make_payment(order.cost):
+    machine.make_coffee(order)
 
 
 
