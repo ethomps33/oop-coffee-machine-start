@@ -28,5 +28,7 @@ machine.is_resource_sufficient(order)
 
 money.make_payment(order.cost)
 
+machine.make_coffee(order)
+
 
 
